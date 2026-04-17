@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="child_exe/child_exe.vcxproj" />
+  <Project Path="Testing parent env/Testing parent env.vcxproj" />
+</Solution>
