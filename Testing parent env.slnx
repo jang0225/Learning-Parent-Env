@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="child_exe/child_exe.vcxproj" />
-  <Project Path="Testing parent env/Testing parent env.vcxproj" />
+  <Project Path="child_exe/child_exe.vcxproj" Id="8c2c8e0d-7666-48d6-bedd-dd27f82f7a0e" />
+  <Project Path="Testing parent env/Testing parent env.vcxproj" Id="ef6aac97-badb-45e9-afc9-42a21c9fe7cb" />
 </Solution>

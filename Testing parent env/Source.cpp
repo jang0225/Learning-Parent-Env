@@ -45,17 +45,25 @@ int main() {
 using namespace std;
 
 void runChild(const char* label, const char* cmd) {
-	cout << "====" << label << "=====" << endl;
+	std::cout << "=== " << label << " ===\n";
 	FILE* pipe = _popen(cmd, "r");
-	if (!pipe) {
-		cerr << "failed\n"; return;
-	}
-	char buf[256];
-
-	while (fgets(buf, sizeof(buf), pipe)) {
-		cout << "  " << buf;
-	}
-	cout << "  exit=" << _pclose(pipe) << endl << endl;
+	if (!pipe) { std::cerr << "failed\n"; return; }
+	char buf[512];
+	while (fgets(buf, sizeof(buf), pipe))
+		std::cout << " " << buf;
+	std::cout << " exit=" << _pclose(pipe) << "\n\n";
+}
+int main() {
+	char exeDir[512];
+	_getcwd(exeDir, sizeof(exeDir)); // x64\Debug
+	_putenv_s("COURSE_MODE", "spawned_by_parent"); // 실험 1: 환경 변수 주입
+	runChild("Env Injection", "child_exe.exe");
+	std::string exePath = std::string(exeDir) + "\\Lab03_Cwd.exe";
+	_chdir("C:\Users\ipad0\OneDrive\바탕 화면\2026-1\프방\Testing parent env\x64\Debug");
+	runChild("CWD = ProjectDir", exePath.c_str()); // 실험 2: 성공 CWD를 ProjectDir로 바꾸면 성공
+		_chdir("C:\\");
+	runChild("CWD = C:\\", exePath.c_str()); // 실험 3: CWD를 루트로 바꾸면 실패
+	_chdir(exeDir); // 복원
 }
 
 
